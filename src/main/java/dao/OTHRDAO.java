@@ -12,7 +12,7 @@ import static domain.OtherRule.Builder.buildOtherRule;
 public class OTHRDAO extends BaseDAO{
 
 
-    public OtherRule getenoughinfotogenerate(int id){
+    public OtherRule getByID(int id){
         generaldaofunctions gdf = new generaldaofunctions();
         OtherRule or = new OtherRule();
         try(Connection con = getToolConnection()){
@@ -45,6 +45,7 @@ public class OTHRDAO extends BaseDAO{
                         .setTrigger(trigger)
                         .setErrorCode(errorcode)
                         .setSql(sqlcode)
+                        .setBusinessRuleID(id)
                         .build();
 
                 //build

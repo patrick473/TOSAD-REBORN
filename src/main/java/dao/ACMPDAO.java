@@ -4,6 +4,7 @@ import domain.attributeCompareRule;
 import domain.attributeRangeRule;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -12,7 +13,7 @@ import static domain.attributeCompareRule.Builder.buildAttributeCompareRule;
 public class ACMPDAO extends BaseDAO{
 
 
-    public attributeCompareRule getenoughinfotogenerate(int id){
+    public attributeCompareRule getByID(int id){
         generaldaofunctions gdf = new generaldaofunctions();
         attributeCompareRule acmp = new attributeCompareRule();
         try(Connection con = getToolConnection()){
@@ -49,6 +50,7 @@ public class ACMPDAO extends BaseDAO{
                     .setTrigger(trigger)
                     .setConstraint(constraint)
                     .setErrorCode(errorcode)
+                    .setBusinessRuleID(id)
                     .build();
                 acmp = acr;
             //return object
@@ -58,5 +60,23 @@ public class ACMPDAO extends BaseDAO{
             e.printStackTrace();
         }
         return acmp;
+    }
+
+    public boolean updateACMP(attributeCompareRule acmp){
+
+        int updated = 0;
+        try(Connection con = super.getToolConnection()) {
+
+            String query = "update attributecomparerule " +
+                    "set operator = ? , " +
+                    "valuebr = ? " +
+                    "where id_businessrule = ?";
+            PreparedStatement stmt = con.prepareStatement(query);
+
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

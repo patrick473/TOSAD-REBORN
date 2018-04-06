@@ -15,7 +15,7 @@ import static domain.attributeListRule.Builder.buildAttributeListRule;
 public class ATLRDAO extends BaseDAO{
 
 
-    public attributeListRule getenoughinfotogenerate(int id){
+    public attributeListRule getByID(int id){
         generaldaofunctions gdf = new generaldaofunctions();
         attributeListRule altr = new attributeListRule();
         try(Connection con = getToolConnection()){
@@ -53,6 +53,7 @@ public class ATLRDAO extends BaseDAO{
                         .setTrigger(trigger)
                         .setConstraint(constraint)
                         .setErrorCode(errorcode)
+                        .setBusinessRuleID(id)
                         .build();
 
                 altr = atlr;

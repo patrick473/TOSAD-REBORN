@@ -12,7 +12,7 @@ import static domain.interEntityCompareRule.Builder.buildInterEntityCompareRule;
 public class IECRDAO extends BaseDAO{
 
 
-    public interEntityCompareRule getenoughinfotogenerate(int id){
+    public interEntityCompareRule getByID(int id){
         generaldaofunctions gdf = new generaldaofunctions();
         interEntityCompareRule iec = new interEntityCompareRule();
         try(Connection con = getToolConnection()){
@@ -37,6 +37,7 @@ public class IECRDAO extends BaseDAO{
                 String operator = rs.getString("operator");
 
 
+
                 //build
                 interEntityCompareRule iecr = buildInterEntityCompareRule()
                         .setName(name)
@@ -51,6 +52,7 @@ public class IECRDAO extends BaseDAO{
                         .setTrigger(trigger)
                         .setConstraint(constraint)
                         .setErrorCode(errorcode)
+                        .setBusinessRuleID(id)
                         .build();
                 iec = iecr;
                 //return object

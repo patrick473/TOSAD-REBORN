@@ -7,12 +7,12 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import static domain.tupleCompareRule.Builder.buildTupleCompareRule;
+import static domain.tupleCompareRule.tupleCompareRuleBuilder.atupleCompareRule;
 
 public class TCMPDAO extends BaseDAO{
 
 
-    public tupleCompareRule getenoughinfotogenerate(int id){
+    public tupleCompareRule getByID(int id){
         generaldaofunctions gdf = new generaldaofunctions();
         tupleCompareRule tcm = new tupleCompareRule();
         try(Connection con = getToolConnection()){
@@ -46,6 +46,7 @@ public class TCMPDAO extends BaseDAO{
                         .setTrigger(trigger)
                         .setConstraint(constraint)
                         .setErrorCode(errorcode)
+                        .set
                         .build();
                 //build
                 tcm = tcr;

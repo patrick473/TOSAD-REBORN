@@ -1,8 +1,7 @@
 package domain;
 
 
-import controller.getInActiveBR;
-import dao.ARNGDAO;
+import dao.ACMPDAO;
 
 
 public class Test {
@@ -10,9 +9,9 @@ public class Test {
     public static void main(String args[]) {
 
 
-        getInActiveBR gabr = new getInActiveBR();
+        ACMPDAO adao = new ACMPDAO();
 
-       System.out.println( gabr.gettoimplementcode());
+       System.out.println(adao.getenoughinfotogenerate(182));
 
 
     }

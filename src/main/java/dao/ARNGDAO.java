@@ -10,7 +10,7 @@ import static domain.attributeRangeRule.Builder.buildAttributeRangeRule;
 public class ARNGDAO extends BaseDAO{
 
 
-    public attributeRangeRule getenoughinfotogenerate(int id){
+    public attributeRangeRule getByID(int id){
         attributeRangeRule at = new attributeRangeRule();
         generaldaofunctions gdf = new generaldaofunctions();
         try(Connection con = getToolConnection()){
@@ -47,6 +47,7 @@ public class ARNGDAO extends BaseDAO{
                         .setTrigger(trigger)
                         .setConstraint(constraint)
                         .setErrorCode(errorcode)
+                        .setBusinessRuleID(id)
                         .build();
 
                 //build
