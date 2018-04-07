@@ -43,18 +43,16 @@ public class generateAttributeCompareRule {
      * @return generated code
      */
     public String createAttributeCompareRuleTrigger(attributeCompareRule compareRule) {
-        String basestring = "Create or replace trigger ";
-        basestring += compareRule.getName() + "\n"
-                + gtws.generateTriggerWhenString(compareRule.isInsert(), compareRule.isDelete(), compareRule.isUpdate(), compareRule.getMainTable(), compareRule.getAffectedColumn());
 
-
-        basestring += "begin" + "\n" +
-                "if " + compareRule.getAffectedColumn() + " " + compareRule.getOperator() + " " + compareRule.getValue() +"  then" + " \n";
-        basestring += "raise_application_error(-20010,'" + compareRule.getErrorCode() + "');" + "\n"
-                + "end if;" + "\n"
-                + "end;";
-
-        return basestring;
+      String query =  "create or replace trigger "+ compareRule.getName()+" "+
+        " "+
+        gtws.generateTriggerWhenString(compareRule.isInsert(),compareRule.isDelete(),compareRule.isUpdate(),compareRule.getMainTable(),compareRule.getAffectedColumn())+
+        " for each row " +
+        "when (NEW."+compareRule.getAffectedColumn()+" "+compareRule.getOperator()+" "+compareRule.getValue()+" )"+
+        "begin"+
+        "raise_Application_Error(-20000, '"+compareRule.getErrorCode()+"');"+
+        "end;";
+        return query;
     }
 
     /**

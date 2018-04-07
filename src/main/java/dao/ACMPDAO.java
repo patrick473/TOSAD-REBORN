@@ -62,21 +62,6 @@ public class ACMPDAO extends BaseDAO{
         return acmp;
     }
 
-    public boolean updateACMP(attributeCompareRule acmp){
-
-        int updated = 0;
-        try(Connection con = super.getToolConnection()) {
-
-            String query = "update attributecomparerule " +
-                    "set operator = ? , " +
-                    "valuebr = ? " +
-                    "where id_businessrule = ?";
-            PreparedStatement stmt = con.prepareStatement(query);
 
 
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
 }

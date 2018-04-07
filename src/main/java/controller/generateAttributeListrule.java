@@ -3,6 +3,8 @@ package controller;
 import domain.attributeListRule;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -43,15 +45,19 @@ public class generateAttributeListrule {
      * @return generated code
      */
     public String createAttributeListRuleTrigger(attributeListRule listRule) {
-        String basestring = "Create or replace trigger ";
-        basestring += listRule.getName() + "\n"
-                + gtws.generateTriggerWhenString(listRule.isInsert(), listRule.isDelete(), listRule.isUpdate(), listRule.getMainTable(), listRule.getAffectedColumn());
-        basestring += "begin \n";
-        basestring += generateStringfromlistForTrigger(listRule);
-        basestring += "then raise_application_error(-20020,'" + listRule.getErrorCode() + "'); \n";
-        basestring += "end if; \n";
-        basestring += "end;";
-        return basestring;
+
+
+        String query =  "create or replace trigger "+ listRule.getName()+" "+
+                " "+
+                gtws.generateTriggerWhenString(listRule.isInsert(),listRule.isDelete(),listRule.isUpdate(),listRule.getMainTable(),listRule.getAffectedColumn())+
+                " for each row " +
+                "when (INSTR(',' || "+listRule.getList()+" || ','\n" +
+                "        ,',' || NEW."+listRule.getAffectedColumn()+" || ',') > 0 )"+
+                "begin"+
+                "raise_Application_Error(-20000, '"+listRule.getErrorCode()+"');"+
+
+                "end;";
+        return query;
     }
 
     /**
@@ -85,28 +91,7 @@ public class generateAttributeListrule {
      * @param listRule the list rule
      * @return the string
      */
-    public String generateStringfromlistForTrigger(attributeListRule listRule) {
-        ArrayList<String> list = listRule.getList();
-        String basestring = "if ";
-        int counter = 0;
-        String operator;
-        if (listRule.isInList()) {
-            operator = " = ";
 
-        } else {
-            operator = " != ";
-        }
-        for (String i : list) {
-            if (counter > 0) {
-                basestring += "or ";
-
-            }
-            basestring += listRule.getAffectedColumn() + operator + "'" + i + "'" + "\n";
-            counter++;
-        }
-        return basestring;
-
-    }
 
     /**
      * Generate a string of a list for constraints .
@@ -116,7 +101,7 @@ public class generateAttributeListrule {
      */
     public String generateStringfromlistForConstraint(attributeListRule listRule) {
         String basestring = "";
-        ArrayList<String> list = listRule.getList();
+        List<String> list = Arrays.asList(listRule.getList().split(","));
         int counter = 0;
 
         for (String i : list) {

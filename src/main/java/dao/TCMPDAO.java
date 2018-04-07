@@ -34,7 +34,7 @@ public class TCMPDAO extends BaseDAO{
                 String affectedcolumn = rs.getString("affectedcolumn");
                 String secondcolumn = rs.getString("secondaffectedcolumn");
                 String operator = rs.getString("operator");
-                tupleCompareRule tcr = buildTupleCompareRule()
+                tupleCompareRule tcr = atupleCompareRule()
                         .setName(name)
                         .setSecondcolumn(secondcolumn)
                         .setOperator(operator)
@@ -46,7 +46,7 @@ public class TCMPDAO extends BaseDAO{
                         .setTrigger(trigger)
                         .setConstraint(constraint)
                         .setErrorCode(errorcode)
-                        .set
+                        .setBusinessRuleID(id)
                         .build();
                 //build
                 tcm = tcr;

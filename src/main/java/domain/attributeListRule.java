@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * The type Attribute list rule.
  */
 public class attributeListRule extends BusinessRule {
-    private ArrayList<String> list;
+    private String list;
     private boolean inList;
     private int attributeListRuleID;
 
@@ -16,7 +16,7 @@ public class attributeListRule extends BusinessRule {
     //get the corresponding variable
 
 
-    public ArrayList<String> getList() {
+    public String getList() {
         return list;
     }
 
@@ -32,7 +32,7 @@ public class attributeListRule extends BusinessRule {
     //set the corresponding variable
 
 
-    public void setList(ArrayList<String> list) {
+    public void setList(String list) {
         this.list = list;
     }
 
@@ -72,7 +72,7 @@ public class attributeListRule extends BusinessRule {
         protected String affectedColumn;
         protected String example;
         protected int BusinessRuleID;
-        private ArrayList<String> list;
+        private String list;
         private boolean inList;
         private int attributeListRuleID;
 
@@ -88,7 +88,7 @@ public class attributeListRule extends BusinessRule {
             return this;
         }
 
-        public Builder setList(ArrayList<String> list) {
+        public Builder setList(String list) {
             this.list = list;
             return this;
         }

@@ -45,7 +45,15 @@ public class generateTupleCompareRule {
                 + "end if;" + "\n"
                 + "end;";
 
-        return basestring;
+        String query =  "create or replace trigger "+ compareRule.getName()+" "+
+                " "+
+                gtws.generateTriggerWhenString(compareRule.isInsert(),compareRule.isDelete(),compareRule.isUpdate(),compareRule.getMainTable(),compareRule.getAffectedColumn())+
+                " for each row " +
+                "when (NEW."+compareRule.getAffectedColumn()+" "+compareRule.getOperator()+" "+compareRule.getSecondcolumn()+" )"+
+                "begin"+
+                "raise_Application_Error(-20000, '"+compareRule.getErrorCode()+"');"+
+                "end;";
+        return query;
     }
 
     /**

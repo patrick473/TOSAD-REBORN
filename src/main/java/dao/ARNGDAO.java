@@ -1,8 +1,10 @@
 package dao;
 
+import domain.attributeCompareRule;
 import domain.attributeRangeRule;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import dao.generaldaofunctions;
@@ -60,4 +62,5 @@ public class ARNGDAO extends BaseDAO{
         }
         return at;
     }
+
 }
