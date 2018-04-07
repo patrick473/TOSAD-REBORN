@@ -9,61 +9,7 @@ import java.sql.Statement;
  */
 public class implementBusinessRuleDAO extends BaseDAO {
 
-    /**
-     * Instantiates a new Implement business rule dao.
-     * executes pl/sql code in target database which is given
-     * updates the rule in tool database
-     * @param generatedCode  to be implemented code
-     * @param businessRuleID the business rule id
-     */
-    public implementBusinessRuleDAO(String generatedCode, int businessRuleID) {
-        if (!checkIsActive(businessRuleID)) {
-            try {
-                Connection con = getTargetConnection();
 
-                Statement stmt = con.createStatement();
-
-                stmt.executeUpdate(generatedCode);
-
-                this.updateActiveBusinessRule(businessRuleID);
-                this.updateGeneratedCode(generatedCode, businessRuleID);
-                System.out.println("BusinessRule Implemented");
-                con.close();
-            } catch (Exception exc) {
-                System.out.println(exc);
-            }
-        }
-    }
-
-    /**
-     * Check is active boolean.
-     *
-     * @param businessRuleID the business rule id
-     * @return the boolean
-     */
-    public boolean checkIsActive(int businessRuleID) {
-
-        boolean active = false;
-
-        try {
-            String baseStatement = "select actief from TOSAD_2017_2C_TEAM3.businessrule " +
-                    "where id_businessrule = " + businessRuleID;
-            Connection con = getToolConnection();
-            Statement stmt = con.createStatement();
-            ResultSet RS = stmt.executeQuery(baseStatement);
-
-            while (RS.next()) {
-                if (RS.getInt("actief") == 1) {
-                    active = true;
-                }
-            }
-
-
-        } catch (Exception exc) {
-            System.out.println(exc);
-        }
-        return active;
-    }
 
     /**
      * Update active business rule.

@@ -36,10 +36,9 @@ public class ATLRDAO extends BaseDAO{
                 String errorcode = rs.getString("errorcode");
                 String affectedcolumn = rs.getString("affectedcolumn");
                 boolean inlist = gdf.istrue(rs.getInt("inlist"));
-                String stringvalue = rs.getString("stringvalue");
+                String list = rs.getString("stringvalue");
 
-                ArrayList<String> list = new ArrayList<>();
-                list.addAll(Arrays.asList(stringvalue.split(":")));
+
 
                 attributeListRule atlr = buildAttributeListRule()
                         .setName(name)

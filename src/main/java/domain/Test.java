@@ -11,7 +11,7 @@ public class Test {
 
         ACMPDAO adao = new ACMPDAO();
 
-       System.out.println(adao.getenoughinfotogenerate(182));
+
 
 
     }
